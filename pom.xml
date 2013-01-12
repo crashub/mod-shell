@@ -13,6 +13,9 @@
     <maven.compiler.source>5</maven.compiler.source>
     <maven.compiler.target>5</maven.compiler.target>
 
+    <!-- Skip test by default as it just run a vertx instance for interactive testing -->
+    <maven.test.skip>true</maven.test.skip>
+
   </properties>
   <dependencies>
 
