@@ -2,12 +2,12 @@ package org.vertx.mods;
 
 import org.crsh.plugin.PluginContext;
 import org.crsh.plugin.PluginLifeCycle;
-import org.crsh.plugin.PropertyDescriptor;
 import org.crsh.plugin.ServiceLoaderDiscovery;
 import org.crsh.vfs.FS;
 import org.crsh.vfs.Path;
 import org.vertx.java.core.json.JsonArray;
 import org.vertx.java.core.json.JsonObject;
+import org.vertx.java.deploy.Verticle;
 
 import java.io.File;
 import java.util.Collections;
@@ -21,12 +21,12 @@ class VertxPluginLifeCycle extends PluginLifeCycle {
   private final ClassLoader loader;
 
   /** . */
-  private final CRaSHBusMod verticle;
+  private final Verticle verticle;
 
   /** . */
   private final PluginContext context;
 
-  VertxPluginLifeCycle(ClassLoader loader, CRaSHBusMod verticle) throws Exception {
+  VertxPluginLifeCycle(ClassLoader loader, Verticle verticle) throws Exception {
 
     //
     HashMap<String, Object> attributes = new HashMap<String, Object>();
