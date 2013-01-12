@@ -36,7 +36,7 @@ Default config:
     }
     
     
-Configuration is mostly based on CRaSH configuration explained in CRaSH documentation (http://www.crashub.org/#doc):
+Configuration is mostly based on CRaSH configuration explained in CRaSH [documentation](http://www.crashub.org/#doc):
 
 # Examples
 
@@ -127,6 +127,36 @@ Use the JDBC module:
     It is Sat Jan 12 15:44:58 CET 2013 now
     % bus send -f JSON -r db { "action": "select", "stmt":   "SELECT * FROM INFORMATION_SCHEMA.SYSTEM_USERS" }
     {"result":[{"INITIAL_SCHEMA":null,"ADMIN":true,"USER_NAME":""}],"status":"ok"}
+
+## Creating custom commands in Groovy
+
+Pretty much like the first example, however we add the current directory under the "cmd" key in the configuration:
+
+    echo '{"cmd":".","crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
+
+Edit hello.groovy
+
+    return "Hello from ${context.attributes.vertx}"
+
+Run Vert.x:
+
+    vertx runmod org.crashub.shell-v1.0 -conf conf.json
+
+Use the hello command:
+
+    (! 505)-> ssh -p 2000 admin@localhost
+    admin@localhost's password:
+    Welcome to Juliens-MacBook-Pro.local + !
+    It is Sat Jan 12 16:41:50 CET 2013 now
+    % hello
+    Hello from org.vertx.java.core.impl.DefaultVertx@5e6b6477
+
+Inside a Groovy command the current Vertx and Container objects are available under
+
+    def vertx = context.attributes.vertx
+    def container = context.attributes.container
+
+For more information about CRaSH commands please read the [documentation](http://www.crashub.org/#doc)
 
 # Usage
 
