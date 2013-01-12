@@ -12,8 +12,6 @@ import org.vertx.java.test.VertxConfiguration;
 import org.vertx.java.test.VertxTestBase;
 import org.vertx.java.test.junit.VertxJUnit4ClassRunner;
 
-import java.util.logging.Logger;
-
 /** @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a> */
 @RunWith(VertxJUnit4ClassRunner.class)
 @VertxConfiguration()
@@ -52,6 +50,7 @@ public class VertxTestCase extends VertxTestBase {
     getEventBus().registerHandler("FOO", new Handler<Message<String>>() {
       public void handle(Message<String> event) {
         System.out.println("Got message " + event);
+        event.reply("Got your message");
       }
     });
 

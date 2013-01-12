@@ -5,14 +5,13 @@ import org.crsh.cmdline.annotations.Command
 import org.crsh.cmdline.annotations.Option
 import org.crsh.cmdline.annotations.Required
 import org.crsh.cmdline.annotations.Usage
-import org.vertx.java.core.AsyncResult
-import org.vertx.java.core.AsyncResultHandler
 import org.vertx.java.core.Handler
 import org.vertx.java.core.eventbus.EventBus
 import org.vertx.java.core.eventbus.Message
-import org.vertx.java.core.json.JsonObject
 import org.vertx.mods.Format
 import org.vertx.mods.VertxCommand
+
+import java.util.concurrent.atomic.AtomicReference
 
 @Usage("Interact with the vert.x event bus")
 public class bus extends VertxCommand {
@@ -26,12 +25,41 @@ public class bus extends VertxCommand {
       @Usage("The message format")
       @Option(names = ["f","format"])
       Format format,
+      @Usage("Wait for a reply and publish it on the console")
+      @Option(names= ["r","reply"])
+      Boolean reply,
       @Usage("The message")
       @Argument(name =  "message", unquote = false)
       @Required List<String> parts) {
     String value = join(parts);
     EventBus bus = getVertx().eventBus();
-    (format?:Format.STRING).send(bus, address, value);
+    if (reply) {
+      final AtomicReference<Message> responseRef = new AtomicReference<Message>(null);
+      def replyHandler = new Handler<Message<Object>>() {
+        void handle(Message message) {
+          synchronized (responseRef) {
+            responseRef.set(message);
+            responseRef.notifyAll();
+          }
+        }
+      }
+      (format?:Format.STRING).send(bus, address, value, replyHandler);
+      synchronized (responseRef) {
+        if (responseRef.get() == null) {
+          try {
+            responseRef.wait();
+          }
+          catch (InterruptedException cancelled) {
+          }
+        }
+      }
+      if (responseRef.get() != null) {
+        Message<Object> response = responseRef.get();
+        out << response.body;
+      }
+    } else {
+      (format?:Format.STRING).send(bus, address, value, null);
+    }
   }
 
   @Usage("Publish a JSON object as a message")
