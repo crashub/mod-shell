@@ -7,7 +7,7 @@
   </formats>
 
   <includeBaseDirectory>true</includeBaseDirectory>
-  <baseDirectory>crash-v1.0</baseDirectory>
+  <baseDirectory>shell-v1.0</baseDirectory>
 
   <fileSets>
     <fileSet>
