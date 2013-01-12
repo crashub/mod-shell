@@ -4,7 +4,7 @@
   <groupId>mod-shell</groupId>
   <artifactId>mod-shell</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>mod-shell for Vert.x</name>
   <url>http://maven.apache.org</url>
   <properties>
