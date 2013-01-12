@@ -158,9 +158,24 @@ Inside a Groovy command the current Vertx and Container objects are available un
 
 For more information about CRaSH commands please read the [documentation](http://www.crashub.org/#doc)
 
-# Usage
+# Vert.x commands
 
-The module embeds an SSH server to an embedded shell in Vert.x . CRaSH comes out of the box with a useful bunch of commands, however the Vert.x integration provides commands for Vert.x:
+The module embeds an SSH server to an embedded shell in Vert.x . CRaSH comes out of the box with a useful bunch of commands,
+however the Vert.x integration provides commands for Vert.x. You can look or modify the existing commands in the mods directory
+($VERTX_MODS) as resources under $VERTX_MODS/org.crashub.shell-v1.0/crash/commands/vertx :
+
+    (! 561)-> ls -l $VERTX_MODS/org.crashub.shell-v1.0/crash/commands/vertx
+    total 40
+    -rw-r--r--  1 julien  staff  3463 Jan 12 16:17 bus.groovy
+    -rw-r--r--  1 julien  staff  1213 Jan 12 16:17 module.groovy
+    -rw-r--r--  1 julien  staff  2212 Jan 12 16:17 sharedmap.groovy
+    -rw-r--r--  1 julien  staff  2016 Jan 12 16:17 verticle.groovy
+    -rw-r--r--  1 julien  staff  3150 Jan 12 16:17 vertx.groovy
+
+You can modify the existing commands if you like or add new commands, such commands will be visible each time the module
+is deployed.
+
+## help command
 
     (! 566)-> ssh -p 2000 admin@localhost
     admin@localhost's password: 
