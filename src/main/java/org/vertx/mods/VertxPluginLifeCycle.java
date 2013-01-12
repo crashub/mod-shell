@@ -6,8 +6,10 @@ import org.crsh.plugin.PropertyDescriptor;
 import org.crsh.plugin.ServiceLoaderDiscovery;
 import org.crsh.vfs.FS;
 import org.crsh.vfs.Path;
+import org.vertx.java.core.json.JsonArray;
 import org.vertx.java.core.json.JsonObject;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Properties;
@@ -32,19 +34,9 @@ class VertxPluginLifeCycle extends PluginLifeCycle {
     attributes.put("container", verticle.getContainer());
 
     //
-    FS confFS = new FS();
-
-    //
-    FS cmdFS = new FS().mount(loader, Path.get("/crash/commands/"));
-    PluginContext context = new PluginContext(
-        new ServiceLoaderDiscovery(loader),
-        Collections.unmodifiableMap(attributes),
-        cmdFS,
-        confFS,
-        loader);
+    JsonObject verticleConfig = verticle.getContainer().getConfig();
 
     // Build configuration
-    JsonObject verticleConfig = verticle.getContainer().getConfig();
     Properties config = new Properties();
     for (String s : verticleConfig.getFieldNames()) {
       if (s.startsWith("crash.")) {
@@ -53,6 +45,32 @@ class VertxPluginLifeCycle extends PluginLifeCycle {
       }
     }
     setConfig(config);
+
+    //
+    FS confFS = new FS();
+
+    //
+    FS cmdFS = new FS();
+    cmdFS.mount(loader, Path.get("/crash/commands/"));
+    Object o = verticleConfig.getField("cmd");
+    if (o instanceof String) {
+      cmdFS.mount(new File((String)o));
+    } else if (o instanceof JsonArray) {
+      JsonArray array = (JsonArray)o;
+      for (Object e : array) {
+        if (e instanceof String) {
+          cmdFS.mount(new File((String)e));
+        }
+      }
+    }
+
+    //
+    PluginContext context = new PluginContext(
+        new ServiceLoaderDiscovery(loader),
+        Collections.unmodifiableMap(attributes),
+        cmdFS,
+        confFS,
+        loader);
 
     //
     this.loader = loader;
