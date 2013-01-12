@@ -8,6 +8,7 @@ The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell.
 * Hot deploy a module or a verticle
 * Hot undeploy a Vert.x deployment
 * Interact with the event bus: send or receive messages
+* Extend Vertx with custom commands
 
 # Usage
 
@@ -38,14 +39,17 @@ Default config:
     
 Configuration is mostly based on CRaSH configuration explained in CRaSH [documentation](http://www.crashub.org/#doc):
 
-# Examples
+# Walkthrough
 
-## Receive message from the bus
+## Install
 
-Run the module standalone:
+Install the shell module:
 
+    vertx install org.crashub.shell-v1.0
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
     vertx runmod org.crashub.shell-v1.0 -conf conf.json
+
+## Receive and send messages
 
 Create a message subscriber
 
@@ -55,7 +59,7 @@ Create a message subscriber
     It is Sat Jan 12 15:47:50 CET 2013 now
     % bus subscribe the_address
 
-Log in with another console and send a message on the_adress:
+Log in with another console and send a message on the_address:
 
     (! 501)-> ssh -p 2000 admin@localhost
     admin@localhost's password: 
@@ -127,6 +131,9 @@ Use the JDBC module:
     It is Sat Jan 12 15:44:58 CET 2013 now
     % bus send -f JSON -r db { "action": "select", "stmt":   "SELECT * FROM INFORMATION_SCHEMA.SYSTEM_USERS" }
     {"result":[{"INITIAL_SCHEMA":null,"ADMIN":true,"USER_NAME":""}],"status":"ok"}
+
+The -r option stands for reply and tell the command to wait and block until a reply is provided after sending the message.
+This is useful with the jdbc module as it sends the result of statement in a response.
 
 ## Creating custom commands in Groovy
 
