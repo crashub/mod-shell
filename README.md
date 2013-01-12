@@ -1,4 +1,4 @@
-The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell. 
+The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell.
 
 # Features
 
@@ -13,16 +13,16 @@ The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell.
 
 ## In your application
 
-Deploy the module shell-v1.0 in your verticle.
+Deploy the module org.crashub.shell-v1.0 in your verticle.
 
 ## Standalone
 
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod shell-v1.0 -conf conf.json
+    vertx runmod org.crashub.shell-v1.0 -conf conf.json
 
 ## As a Vert.x module
 
-Deploy the shell-v1.0 module from your verticle.
+Deploy the org.crashub.shell-v1.0 module from your verticle.
 
 # Configuration
 
@@ -45,7 +45,7 @@ Configuration is mostly based on CRaSH configuration explained in CRaSH document
 Run the module standalone:
 
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod shell-v1.0 -conf conf.json
+    vertx runmod org.crashub.shell-v1.0 -conf conf.json
 
 Create a message subscriber
 
@@ -78,7 +78,7 @@ Create the file server.js:
         "username": "julien.viet@gmail.com",
         "password": "XXXXXXXXXXX"
     });
-    vertx.deployModule("shell-v1.0", {
+    vertx.deployModule("org.crashub.shell-v1.0", {
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
         "crash.auth.simple.password": "admin"
@@ -108,7 +108,7 @@ Create the server.js file:
         "username" : "",
         "password": ""
     });
-    vertx.deployModule("shell-v1.0", {
+    vertx.deployModule("org.crashub.shell-v1.0", {
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
         "crash.auth.simple.password": "admin"

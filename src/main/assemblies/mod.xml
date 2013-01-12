@@ -7,7 +7,7 @@
   </formats>
 
   <includeBaseDirectory>true</includeBaseDirectory>
-  <baseDirectory>shell-v1.0</baseDirectory>
+  <baseDirectory>org.crashub.shell-v1.0</baseDirectory>
 
   <fileSets>
     <fileSet>
