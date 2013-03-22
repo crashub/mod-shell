@@ -1,9 +1,9 @@
 package crash.commands.vertx
 
-import org.crsh.cmdline.annotations.Argument
-import org.crsh.cmdline.annotations.Command
-import org.crsh.cmdline.annotations.Required
-import org.crsh.cmdline.annotations.Usage;
+import org.crsh.cli.Argument
+import org.crsh.cli.Command
+import org.crsh.cli.Required
+import org.crsh.cli.Usage;
 import org.vertx.java.core.http.impl.DefaultHttpServer
 import org.vertx.java.core.json.JsonObject
 import org.vertx.java.core.net.impl.DefaultNetServer

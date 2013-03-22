@@ -1,6 +1,6 @@
 package crash.commands.vertx
 
-import org.crsh.cmdline.annotations.*
+import org.crsh.cli.*
 import org.crsh.command.ScriptException
 import org.vertx.java.core.json.JsonObject
 import org.vertx.mods.VertxCommand

@@ -19,7 +19,7 @@
   <dependencySets>
     <dependencySet>
       <includes>
-        <include>org.crsh:crsh.cmdline</include>
+        <include>org.crsh:crsh.cli</include>
         <include>org.crsh:crsh.shell.core</include>
 <!--
         <include>org.crsh:crsh.shell.telnet</include>
