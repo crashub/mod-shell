@@ -14,16 +14,16 @@ The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell.
 
 ## In your application
 
-Deploy the module org.crashub.shell-v1.0 in your verticle.
+Deploy the module org.crashub.shell-v1.1 in your verticle.
 
 ## Standalone
 
-    echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod org.crashub.shell-v1.0 -conf conf.json
+    echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin","crash.ssh.port":2000}' > conf.json
+    vertx runmod org.crashub.shell-v1.1 -conf conf.json
 
 ## As a Vert.x module
 
-Deploy the org.crashub.shell-v1.0 module from your verticle.
+Deploy the org.crashub.shell-v1.1 module from your verticle.
 
 # Configuration
 
@@ -45,9 +45,9 @@ Configuration is mostly based on CRaSH configuration explained in CRaSH [documen
 
 Install the shell module:
 
-    vertx install org.crashub.shell-v1.0
+    vertx install org.crashub.shell-v1.1
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod org.crashub.shell-v1.0 -conf conf.json
+    vertx runmod org.crashub.shell-v1.1 -conf conf.json
 
 ## Receive and send messages
 
@@ -82,10 +82,11 @@ Create the file server.js:
         "username": "julien.viet@gmail.com",
         "password": "XXXXXXXXXXX"
     });
-    vertx.deployModule("org.crashub.shell-v1.0", {
+    vertx.deployModule("org.crashub.shell-v1.1", {
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
-        "crash.auth.simple.password": "admin"
+        "crash.auth.simple.password": "admin",
+        "crash.ssh.port": 2000
     });
 
 Run Vert.x:
@@ -112,10 +113,11 @@ Create the server.js file:
         "username" : "",
         "password": ""
     });
-    vertx.deployModule("org.crashub.shell-v1.0", {
+    vertx.deployModule("org.crashub.shell-v1.1", {
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
-        "crash.auth.simple.password": "admin"
+        "crash.auth.simple.password": "admin",
+        "crash.ssh.port": 2000
     });
 
 Copy the HSLQDB jar in your $VERTX_HOME/lib.
@@ -147,7 +149,7 @@ Edit hello.groovy
 
 Run Vert.x:
 
-    vertx runmod org.crashub.shell-v1.0 -conf conf.json
+    vertx runmod org.crashub.shell-v1.1 -conf conf.json
 
 Use the hello command:
 
@@ -169,9 +171,9 @@ For more information about CRaSH commands please read the [documentation](http:/
 
 The module embeds an SSH server to an embedded shell in Vert.x . CRaSH comes out of the box with a useful bunch of commands,
 however the Vert.x integration provides commands for Vert.x. You can look or modify the existing commands in the mods directory
-($VERTX_MODS) as resources under $VERTX_MODS/org.crashub.shell-v1.0/crash/commands/vertx :
+($VERTX_MODS) as resources under $VERTX_MODS/org.crashub.shell-v1.1/crash/commands/vertx :
 
-    (! 561)-> ls -l $VERTX_MODS/org.crashub.shell-v1.0/crash/commands/vertx
+    (! 561)-> ls -l $VERTX_MODS/org.crashub.shell-v1.1/crash/commands/vertx
     total 40
     -rw-r--r--  1 julien  staff  3463 Jan 12 16:17 bus.groovy
     -rw-r--r--  1 julien  staff  1213 Jan 12 16:17 module.groovy
