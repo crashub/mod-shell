@@ -4,7 +4,7 @@
   <groupId>org.crashub.mod-shell</groupId>
   <artifactId>core</artifactId>
   <packaging>jar</packaging>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.1.1</version>
   <name>Shell module for Vert.x</name>
   <url>http://maven.apache.org</url>
   <properties>
