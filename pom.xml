@@ -38,19 +38,19 @@
     <dependency>
       <groupId>org.crsh</groupId>
       <artifactId>crsh.cli</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
     </dependency>
     <dependency>
       <groupId>org.crsh</groupId>
       <artifactId>crsh.shell.core</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
     </dependency>
 
     <!-- -->
     <dependency>
       <groupId>org.crsh</groupId>
       <artifactId>crsh.shell.telnet</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
     </dependency>
     <dependency>
       <groupId>net.wimpi</groupId>
@@ -67,7 +67,7 @@
     <dependency>
       <groupId>org.crsh</groupId>
       <artifactId>crsh.shell.ssh</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
     </dependency>
     <dependency>
       <groupId>org.apache.mina</groupId>
