@@ -7,7 +7,7 @@ import org.crsh.vfs.FS;
 import org.crsh.vfs.Path;
 import org.vertx.java.core.json.JsonArray;
 import org.vertx.java.core.json.JsonObject;
-import org.vertx.java.deploy.Verticle;
+import org.vertx.java.platform.Verticle;
 
 import java.io.File;
 import java.util.Collections;
@@ -34,7 +34,7 @@ class VertxPluginLifeCycle extends PluginLifeCycle {
     attributes.put("container", verticle.getContainer());
 
     //
-    JsonObject verticleConfig = verticle.getContainer().getConfig();
+    JsonObject verticleConfig = verticle.getContainer().config();
 
     // Build configuration
     Properties config = new Properties();

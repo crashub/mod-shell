@@ -1,1 +1,8 @@
-{"main":"org.vertx.mods.CRaSHBusMod"}
+{
+  "main":"org.vertx.mods.CRaSHBusMod",
+  "description": "This module provides a remote shell access for a Vert.x server",
+  "licenses": ["GNU Lesser General Public License"],
+  "author": "Julien Viet",
+  "keywords": ["shell","admin","management"],
+  "homepage": "https://github.com/crashub/mod-shell"
+}

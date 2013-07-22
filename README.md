@@ -1,5 +1,10 @@
 The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell.
 
+# Status
+
+* 2.0 stable
+* works with Vert.x 2.0 (older version 1.x work with Vert.x 1.3.x)
+
 # Features
 
 * List Vert.x http and net servers
@@ -14,16 +19,16 @@ The module mod-shell provides an embedded shell for Vert.x based on CRaSH shell.
 
 ## In your application
 
-Deploy the module org.crashub.shell-v1.1 in your verticle.
+Deploy the module org.crashub~mod-shell in your verticle.
 
 ## Standalone
 
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin","crash.ssh.port":2000}' > conf.json
-    vertx runmod org.crashub.shell-v1.1 -conf conf.json
+    vertx runmod org.crashub~mod-shell~2.0.0-SNAPSHOT -conf conf.json
 
 ## As a Vert.x module
 
-Deploy the org.crashub.shell-v1.1 module from your verticle.
+Deploy the org.crashub~mod-shell~2.0.0-SNAPSHOT module from your verticle.
 
 # Configuration
 
@@ -45,9 +50,9 @@ Configuration is mostly based on CRaSH configuration explained in CRaSH [documen
 
 Install the shell module:
 
-    vertx install org.crashub.shell-v1.1
+    vertx install org.crashub~mod-shell~2.0.0-SNAPSHOT
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod org.crashub.shell-v1.1 -conf conf.json
+    vertx runmod org.crashub~mod-shell~2.0.0-SNAPSHOT -conf conf.json
 
 ## Receive and send messages
 
@@ -72,17 +77,18 @@ Log in with another console and send a message on the_address:
 
 Create the file server.js:
 
-    load('vertx.js');
-    vertx.deployModule("vertx.mailer-v1.1", {
+    var container = require('vertx/container');
+    container.deployModule("io.vertx~mod-mailer~2.0.0-beta2", {
         "address": "test.my_mailer",
         "host": "smtp.googlemail.com",
         "port": 465,
         "ssl": true,
         "auth": true,
-        "username": "julien.viet@gmail.com",
-        "password": "XXXXXXXXXXX"
+        "username": "username",
+        "password": "password"
     });
-    vertx.deployModule("org.crashub.shell-v1.1", {
+    container.deployModule("org.crashub~mod-shell~2.0.0-SNAPSHOT", {
+        "cmd": ".",
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
         "crash.auth.simple.password": "admin",
@@ -105,15 +111,16 @@ Use the shell:
 
 Create the server.js file:
 
-    load('vertx.js');
-    vertx.deployModule("com.bloidonia.jdbc-persistor-v1.1", {
-        "address": "db",
-        "driver": "org.hsqldb.jdbcDriver",
-        "url"      : "jdbc:hsqldb:mem:test",
+    var container = require('vertx/container');
+    container.deployModule("com.bloidonia~mod-jdbc-persistor~2.0.0-beta5", {
+        "address" : "db",
+        "driver" : "org.hsqldb.jdbcDriver",
+        "url" : "jdbc:hsqldb:mem:test",
         "username" : "",
-        "password": ""
+        "password" : ""
     });
-    vertx.deployModule("org.crashub.shell-v1.1", {
+    container.deployModule("org.crashub~mod-shell~2.0.0-SNAPSHOT", {
+        "cmd": ".",
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
         "crash.auth.simple.password": "admin",
@@ -149,7 +156,7 @@ Edit hello.groovy
 
 Run Vert.x:
 
-    vertx runmod org.crashub.shell-v1.1 -conf conf.json
+    vertx runmod org.crashub~mod-shell~2.0.0-SNAPSHOT -conf conf.json
 
 Use the hello command:
 
@@ -171,9 +178,9 @@ For more information about CRaSH commands please read the [documentation](http:/
 
 The module embeds an SSH server to an embedded shell in Vert.x . CRaSH comes out of the box with a useful bunch of commands,
 however the Vert.x integration provides commands for Vert.x. You can look or modify the existing commands in the mods directory
-($VERTX_MODS) as resources under $VERTX_MODS/org.crashub.shell-v1.1/crash/commands/vertx :
+($VERTX_MODS) as resources under $VERTX_MODS/org.crashub~mod-shell~2.0.0-SNAPSHOT/crash/commands/vertx :
 
-    (! 561)-> ls -l $VERTX_MODS/org.crashub.shell-v1.1/crash/commands/vertx
+    (! 561)-> ls -l $VERTX_MODS/org.crashub~mod-shell~2.0.0-SNAPSHOT/crash/commands/vertx
     total 40
     -rw-r--r--  1 julien  staff  3463 Jan 12 16:17 bus.groovy
     -rw-r--r--  1 julien  staff  1213 Jan 12 16:17 module.groovy
@@ -206,6 +213,7 @@ is deployed.
     The most commonly used vertx commands are:
        config           Display vert.x config
        deployments      List existing deployments
+       deployment       Provide info about an existing deployment
        undeploy         Undeploy a deployment
        net              List existing net servers
        http             List existing http servers
@@ -249,4 +257,3 @@ is deployed.
        publish          Publish a JSON object as a message
        send             Send a message on the bus
        subscribe        Read message from the bus
-

@@ -1,24 +1,35 @@
-load('vertx.js');
-vertx.deployModule("com.bloidonia.jdbc-persistor-v1.1", {
-    "address": "db",
-    "driver": "org.hsqldb.jdbcDriver",
-    "url"      : "jdbc:hsqldb:mem:test",
+// A small server setup with mod-shell
+
+var vertx = require('vertx');
+var console = require('vertx/console');
+var container = require('vertx/container');
+
+// Shared map
+var map = vertx.getMap('demo.mymap');
+map.put('some-key', 'some-value');
+
+// Deploy mod-shell and additional modules
+container.deployModule("com.bloidonia~mod-jdbc-persistor~2.0.0-beta5", {
+    "address" : "db",
+    "driver" : "org.hsqldb.jdbcDriver",
+    "url" : "jdbc:hsqldb:mem:test",
     "username" : "",
-    "password": ""
+    "password" : ""
 });
-vertx.deployModule("vertx.mailer-v1.1", {
+container.deployModule("io.vertx~mod-mailer~2.0.0-beta2", {
     "address": "test.my_mailer",
     "host": "smtp.googlemail.com",
     "port": 465,
     "ssl": true,
     "auth": true,
-    "username": "julien.viet@gmail.com",
-    "password": "gr1b0u1ll3"
+    "username": "username",
+    "password": "password"
 });
-vertx.deployModule("org.crashub.shell-v1.1", {
+container.deployModule("org.crashub~mod-shell~2.0.0-SNAPSHOT", {
     "cmd": ".",
-	"crash.auth": "simple",
-	"crash.auth.simple.username": "admin",
-	"crash.auth.simple.password": "admin",
-        "crash.ssh.port": 2000
+    "crash.auth": "simple",
+    "crash.auth.simple.username": "admin",
+    "crash.auth.simple.password": "admin",
+    "crash.ssh.port": 2000
 });
+

@@ -5,11 +5,15 @@ import org.crsh.command.ScriptException;
 import org.vertx.java.core.Vertx;
 import org.vertx.java.core.json.DecodeException;
 import org.vertx.java.core.json.JsonObject;
-import org.vertx.java.deploy.Container;
-import org.vertx.java.deploy.impl.Deployment;
-import org.vertx.java.deploy.impl.VerticleManager;
+import org.vertx.java.platform.Container;
+import org.vertx.java.platform.impl.DefaultContainer;
+import org.vertx.java.platform.impl.DefaultPlatformManager;
+import org.vertx.java.platform.impl.Deployment;
+import org.vertx.java.platform.impl.PlatformManagerInternal;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,24 +28,25 @@ public class VertxCommand extends CRaSHCommand {
     return (Container)context.getAttributes().get("container");
   }
 
-  protected final VerticleManager getManager() {
+  protected final PlatformManagerInternal getManager() {
     try {
       Container container = getContainer();
-      Field f = Container.class.getDeclaredField("mgr");
+      Field f = DefaultContainer.class.getDeclaredField("mgr");
       f.setAccessible(true);
-      return (VerticleManager)f.get(container);
+      return (PlatformManagerInternal)f.get(container);
     }
     catch (Exception e) {
+      e.printStackTrace();
       throw new ScriptException("Could not access verticle manager");
     }
   }
 
-  protected final  Map<String, Deployment> getDeployments() {
+  protected final Map<String, Deployment> getDeployments() {
     try {
-      VerticleManager mgr = getManager();
-      Field d = VerticleManager.class.getDeclaredField("deployments");
+      PlatformManagerInternal mgr = getManager();
+      Field d = DefaultPlatformManager.class.getDeclaredField("deployments");
       d.setAccessible(true);
-      return (Map<String, Deployment>)d.get(mgr);
+      return Collections.unmodifiableMap((Map<String, Deployment>)d.get(mgr));
     }
     catch (Exception e) {
       throw new ScriptException("Could not access deployments");
