@@ -25,7 +25,7 @@ container.deployModule("io.vertx~mod-mailer~2.0.0-beta2", {
     "username": "username",
     "password": "password"
 });
-container.deployModule("org.crashub~mod-shell~2.0.0-SNAPSHOT", {
+container.deployModule("org.crashub~vertx.shell~2.0.0", {
     "cmd": "../commands",
     "crash.auth": "simple",
     "crash.auth.simple.username": "admin",
