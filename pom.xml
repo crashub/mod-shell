@@ -2,16 +2,56 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.crashub</groupId>
-  <artifactId>mod-shell</artifactId>
+  <artifactId>vertx.shell</artifactId>
   <packaging>jar</packaging>
   <version>2.0.0-SNAPSHOT</version>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
   <name>Shell module for Vert.x</name>
+  <description>A Vert.x module providing remote shell access based on CRaSH shell</description>
   <url>http://maven.apache.org</url>
+  <organization>
+    <name>Crashub</name>
+    <url>http://www.crashub.org</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>LGPL, version 2.1</name>
+      <url>http://www.opensource.org/licenses/lgpl-license.php</url>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git://github.com/crashub/mod-shell.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/crashub/mod-shell.git</developerConnection>
+    <url>http://www.crashub.org</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>julien.viet</id>
+      <name>Julien Viet</name>
+      <email>julien.viet@exoplatform.com</email>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+  </developers>
   <properties>
 
-    <!-- Java 5 -->
-    <maven.compiler.source>5</maven.compiler.source>
-    <maven.compiler.target>5</maven.compiler.target>
+    <!-- maven-release-plugin -->
+    <useReleaseProfile>false</useReleaseProfile>
+    <arguments>-Psign-artifacts</arguments>
+    <pushChanges>false</pushChanges>
+    <autoVersionSubmodules>true</autoVersionSubmodules>
+
+    <!-- Java 7 -->
+    <maven.compiler.source>7</maven.compiler.source>
+    <maven.compiler.target>7</maven.compiler.target>
+
+    <!-- Encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Skip test by default as it just run a vertx instance for interactive testing -->
     <maven.test.skip>true</maven.test.skip>
@@ -153,14 +193,14 @@
       </plugins>
     </pluginManagement>
     <plugins>
+
+      <!-- Vert.x mod packaging -->
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.3</version>
-<!--
         <configuration>
           <attach>true</attach>
         </configuration>
--->
         <executions>
           <execution>
             <id>mod</id>
@@ -174,6 +214,53 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Install sources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Avoid issues with signature plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <mavenExecutorId>forked-path</mavenExecutorId>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>sign-artifacts</id>
+      <build>
+        <plugins>
+          <!-- We want to sign the artifact, the POM, and all attached artifacts -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
