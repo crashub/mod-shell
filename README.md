@@ -29,7 +29,7 @@ The module mod-shell provides an embedded shell for Vert.x based on [CRaSH shell
 * 2.0 stable
 * works with Vert.x 2.0.x (older version 1.x work with Vert.x 1.3.x)
 * Published in Maven Central
-* Based on CRaSH 1.3.0-beta3
+* Based on CRaSH 1.3.0-beta4
 
 # Usage
 
