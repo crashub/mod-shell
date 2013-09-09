@@ -5,13 +5,20 @@ The module mod-shell provides an embedded shell for Vert.x based on [CRaSH shell
 * Extend Vertx with a command line interface
     * Script Vert.x
     * Write your own commands in Groovy or Java (more languages later...)
-* Easy Vert.x management
+* Advanced Vert.x management
     * List Vert.x http and net servers
     * List Vert.x deployments
     * Interact with Vert.x shared maps
     * Hot deploy a module or a verticle
     * Hot undeploy a Vert.x deployment
     * Interact with the event bus: send or receive messages
+* Advanced shell features
+    * Powerfull REPL
+    * JVM commands : jdbc, thread, log, ...
+    * Various plugin : mail, cron, ...
+    * Writing custom commands is easy
+    * Advance completion
+    * SSH access
 
 # Documentation
 
@@ -29,7 +36,6 @@ The module mod-shell provides an embedded shell for Vert.x based on [CRaSH shell
 * 2.0 stable
 * works with Vert.x 2.0.x (older version 1.x work with Vert.x 1.3.x)
 * Published in Maven Central
-* Based on CRaSH 1.3.0-beta4
 
 # Usage
 
@@ -40,11 +46,11 @@ Deploy the module org.crashub~vertx.shell in your verticle.
 ## Standalone
 
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin","crash.ssh.port":2000}' > conf.json
-    vertx runmod org.crashub~vertx.shell~2.0.0 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.1 -conf conf.json
 
 ## As a Vert.x module
 
-Deploy the org.crashub~vertx.shell~2.0.0 module from your verticle.
+Deploy the org.crashub~vertx.shell~2.0.1 module from your verticle.
 
 # Configuration
 
@@ -66,9 +72,9 @@ Configuration is mostly based on CRaSH configuration explained in CRaSH [documen
 
 Install the shell module:
 
-    vertx install org.crashub~vertx.shell~2.0.0
+    vertx install org.crashub~vertx.shell~2.0.1
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod org.crashub~vertx.shell~2.0.0 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.1 -conf conf.json
 
 ## Receive and send messages
 
@@ -94,7 +100,7 @@ Log in with another console and send a message on the_address:
 Create the file server.js:
 
     var container = require('vertx/container');
-    container.deployModule("io.vertx~mod-mailer~2.0.0-beta2", {
+    container.deployModule("io.vertx~mod-mailer~2.0.1-beta2", {
         "address": "test.my_mailer",
         "host": "smtp.googlemail.com",
         "port": 465,
@@ -103,7 +109,7 @@ Create the file server.js:
         "username": "username",
         "password": "password"
     });
-    container.deployModule("org.crashub~vertx.shell~2.0.0", {
+    container.deployModule("org.crashub~vertx.shell~2.0.1", {
         "cmd": ".",
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
@@ -128,14 +134,14 @@ Use the shell:
 Create the server.js file:
 
     var container = require('vertx/container');
-    container.deployModule("com.bloidonia~mod-jdbc-persistor~2.0.0-beta5", {
+    container.deployModule("com.bloidonia~mod-jdbc-persistor~2.0.1-beta5", {
         "address" : "db",
         "driver" : "org.hsqldb.jdbcDriver",
         "url" : "jdbc:hsqldb:mem:test",
         "username" : "",
         "password" : ""
     });
-    container.deployModule("org.crashub~vertx.shell~2.0.0", {
+    container.deployModule("org.crashub~vertx.shell~2.0.1", {
         "cmd": ".",
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
@@ -172,7 +178,7 @@ Edit hello.groovy
 
 Run Vert.x:
 
-    vertx runmod org.crashub~vertx.shell~2.0.0 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.1 -conf conf.json
 
 Use the hello command:
 
@@ -197,9 +203,9 @@ Commands located in _cmd_ are live reloaded. Note that commands located under _c
 
 The module embeds an SSH server to an embedded shell in Vert.x . CRaSH comes out of the box with a useful bunch of commands,
 however the Vert.x integration provides commands for Vert.x. You can look or modify the existing commands in the mods directory
-($VERTX_MODS) as resources under $VERTX_MODS/org.crashub~vertx.shell~2.0.0/crash/commands/vertx :
+($VERTX_MODS) as resources under $VERTX_MODS/org.crashub~vertx.shell~2.0.1/crash/commands/vertx :
 
-    (! 561)-> ls -l $VERTX_MODS/org.crashub~vertx.shell~2.0.0/crash/commands/vertx
+    (! 561)-> ls -l $VERTX_MODS/org.crashub~vertx.shell~2.0.1/crash/commands/vertx
     total 40
     -rw-r--r--  1 julien  staff  3463 Jan 12 16:17 bus.groovy
     -rw-r--r--  1 julien  staff  1213 Jan 12 16:17 module.groovy
