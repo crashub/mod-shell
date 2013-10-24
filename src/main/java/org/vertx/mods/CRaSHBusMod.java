@@ -22,13 +22,9 @@ public class CRaSHBusMod extends BusModBase {
 
   @Override
   public void stop() {
-//    if (lifeCycle != null) {
-//      lifeCycle.stop();
-//    }
-    System.out.println("SHOULD STOP CRASH");
-    System.out.println("SHOULD STOP CRASH");
-    System.out.println("SHOULD STOP CRASH");
-    System.out.println("SHOULD STOP CRASH");
-    System.out.println("SHOULD STOP CRASH");
+    if (lifeCycle != null) {
+      lifeCycle.stop();
+      lifeCycle = null;
+    }
   }
 }
