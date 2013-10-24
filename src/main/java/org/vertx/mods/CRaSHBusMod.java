@@ -19,4 +19,16 @@ public class CRaSHBusMod extends BusModBase {
       throw new RuntimeException("Could not start mod", e);
     }
   }
+
+  @Override
+  public void stop() {
+//    if (lifeCycle != null) {
+//      lifeCycle.stop();
+//    }
+    System.out.println("SHOULD STOP CRASH");
+    System.out.println("SHOULD STOP CRASH");
+    System.out.println("SHOULD STOP CRASH");
+    System.out.println("SHOULD STOP CRASH");
+    System.out.println("SHOULD STOP CRASH");
+  }
 }
