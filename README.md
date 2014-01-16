@@ -46,11 +46,11 @@ Deploy the module org.crashub~vertx.shell in your verticle.
 ## Standalone
 
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin","crash.ssh.port":2000}' > conf.json
-    vertx runmod org.crashub~vertx.shell~2.0.3 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.4 -conf conf.json
 
 ## As a Vert.x module
 
-Deploy the org.crashub~vertx.shell~2.0.3 module from your verticle.
+Deploy the org.crashub~vertx.shell~2.0.4 module from your verticle.
 
 # Configuration
 
@@ -72,9 +72,9 @@ Configuration is mostly based on CRaSH configuration explained in CRaSH [documen
 
 Install the shell module:
 
-    vertx install org.crashub~vertx.shell~2.0.3
+    vertx install org.crashub~vertx.shell~2.0.4
     echo '{"crash.auth": "simple","crash.auth.simple.username": "admin","crash.auth.simple.password": "admin"}' > conf.json
-    vertx runmod org.crashub~vertx.shell~2.0.3 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.4 -conf conf.json
 
 ## Receive and send messages
 
@@ -109,7 +109,7 @@ Create the file server.js:
         "username": "username",
         "password": "password"
     });
-    container.deployModule("org.crashub~vertx.shell~2.0.3", {
+    container.deployModule("org.crashub~vertx.shell~2.0.4", {
         "cmd": ".",
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
@@ -141,7 +141,7 @@ Create the server.js file:
         "username" : "",
         "password" : ""
     });
-    container.deployModule("org.crashub~vertx.shell~2.0.3", {
+    container.deployModule("org.crashub~vertx.shell~2.0.4", {
         "cmd": ".",
         "crash.auth": "simple",
         "crash.auth.simple.username": "admin",
@@ -178,7 +178,7 @@ Edit hello.groovy
 
 Run Vert.x:
 
-    vertx runmod org.crashub~vertx.shell~2.0.3 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.4 -conf conf.json
 
 Use the hello command:
 
@@ -203,9 +203,9 @@ Commands located in _cmd_ are live reloaded. Note that commands located under _c
 
 The module embeds an SSH server to an embedded shell in Vert.x . CRaSH comes out of the box with a useful bunch of commands,
 however the Vert.x integration provides commands for Vert.x. You can look or modify the existing commands in the mods directory
-($VERTX_MODS) as resources under $VERTX_MODS/org.crashub~vertx.shell~2.0.3/crash/commands/vertx :
+($VERTX_MODS) as resources under $VERTX_MODS/org.crashub~vertx.shell~2.0.4/crash/commands/vertx :
 
-    (! 561)-> ls -l $VERTX_MODS/org.crashub~vertx.shell~2.0.3/crash/commands/vertx
+    (! 561)-> ls -l $VERTX_MODS/org.crashub~vertx.shell~2.0.4/crash/commands/vertx
     total 40
     -rw-r--r--  1 julien  staff  3463 Jan 12 16:17 bus.groovy
     -rw-r--r--  1 julien  staff  1213 Jan 12 16:17 module.groovy
