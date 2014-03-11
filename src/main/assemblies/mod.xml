@@ -22,15 +22,18 @@
         <include>org.crashub:crash.cli</include>
         <include>org.crashub:crash.shell</include>
         <include>org.crashub:crash.connectors.ssh</include>
+        <include>org.crashub:crash.connectors.telnet</include>
         <include>org.apache.mina:mina-core</include>
         <include>org.apache.sshd:sshd-core</include>
         <include>org.apache.sshd:sshd-pam</include>
         <include>org.bouncycastle:bcprov-jdk16</include>
+        <include>net.wimpi:telnetd-x</include>
         <include>org.slf4j:slf4j-api</include>
         <include>org.slf4j:slf4j-jdk14</include>
+        <include>commons-logging:commons-logging</include>
         <include>org.codehaus.groovy:groovy-all</include>
       </includes>
-      <useTransitiveDependencies>false</useTransitiveDependencies>
+      <useTransitiveDependencies>true</useTransitiveDependencies>
       <useTransitiveFiltering>true</useTransitiveFiltering>
       <useProjectArtifact>false</useProjectArtifact>
       <outputDirectory>/lib</outputDirectory>

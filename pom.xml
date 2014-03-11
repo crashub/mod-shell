@@ -94,7 +94,7 @@
       </exclusions>
     </dependency>
 
-    <!-- -->
+    <!--  -->
     <dependency>
       <groupId>org.crashub</groupId>
       <artifactId>crash.connectors.ssh</artifactId>
@@ -120,6 +120,13 @@
       <artifactId>bcprov-jdk16</artifactId>
       <version>1.46</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.crashub</groupId>
+      <artifactId>crash.connectors.telnet</artifactId>
+      <version>${crash.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
