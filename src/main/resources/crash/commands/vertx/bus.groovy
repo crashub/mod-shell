@@ -68,6 +68,8 @@ public class bus extends VertxCommand {
       @Usage("The address to send to")
       @Argument(name =  "address")
       @Required String address,
+      @Option(names = ["f","format"])
+      Format format,
       @Usage("The message")
       @Argument(name =  "message", unquote = false)
       @Required List<String> parts) {
