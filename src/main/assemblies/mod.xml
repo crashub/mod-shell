@@ -22,6 +22,7 @@
         <include>org.crashub:crash.cli</include>
         <include>org.crashub:crash.shell</include>
         <include>org.crashub:crash.connectors.ssh</include>
+        <include>jline:jline</include>
         <include>org.apache.mina:mina-core</include>
         <include>org.apache.sshd:sshd-core</include>
         <include>org.apache.sshd:sshd-pam</include>
