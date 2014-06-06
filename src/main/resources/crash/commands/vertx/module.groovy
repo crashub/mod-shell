@@ -5,19 +5,19 @@ import org.crsh.command.ScriptException
 import org.vertx.java.core.json.JsonObject
 import org.vertx.mods.VertxCommand
 
-@Usage("Interact with vert.x modules")
+@Usage("interact with vert.x modules")
 public class module extends VertxCommand {
 
   @Command
-  @Usage("Deploy a module")
+  @Usage("deploy a module")
   public void deploy(
-      @Usage("The main to deploy")
+      @Usage("the main to deploy")
       @Argument(name =  "main")
       @Required String main,
-      @Usage("The number of instances")
+      @Usage("the number of instances")
       @Option(names = ["i", "instances"])
       Integer instances,
-      @Usage("The module config")
+      @Usage("the module config")
       @Argument(name =  "config", unquote = false)
       List<String> parts) {
     JsonObject config = parts != null ? parseJson(parts) : null;

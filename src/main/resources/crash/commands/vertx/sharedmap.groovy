@@ -7,10 +7,10 @@ import org.crsh.cli.Usage
 import org.vertx.java.core.shareddata.SharedData
 import org.vertx.mods.VertxCommand
 
-@Usage("Interact with the vert.x shared map")
+@Usage("interact with the vert.x shared map")
 public class sharedmap extends VertxCommand {
 
-  @Usage("List content of a map")
+  @Usage("list content of a map")
   @Command
   public void keys(
       @Usage("The map")
@@ -25,7 +25,7 @@ public class sharedmap extends VertxCommand {
     }
   }
 
-  @Usage("Get a value")
+  @Usage("get a value")
   @Command
   public String get(
       @Usage("The map")
@@ -38,7 +38,7 @@ public class sharedmap extends VertxCommand {
     return shared.getMap(map).get(key);
   }
 
-  @Usage("Put a value")
+  @Usage("put a value")
   @Command
   public void put(
       @Usage("The map")
@@ -54,7 +54,7 @@ public class sharedmap extends VertxCommand {
     shared.getMap(map).put(key, value);
   }
 
-  @Usage("Remove a value")
+  @Usage("remove a value")
   @Command
   public void rm(
       @Usage("The map")
@@ -67,7 +67,7 @@ public class sharedmap extends VertxCommand {
     shared.getMap(map).remove(key);
   }
 
-  @Usage("Clear a map")
+  @Usage("clear a map")
   @Command
   public void clear(
       @Usage("The map")
@@ -77,7 +77,7 @@ public class sharedmap extends VertxCommand {
     shared.getMap(map).clear();
   }
 
-  @Usage("Destroy a shared map")
+  @Usage("destroy a shared map")
   @Command
   public void destroy(
       @Usage("The map")

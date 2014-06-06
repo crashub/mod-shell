@@ -9,11 +9,11 @@ import org.crsh.command.ScriptException
 import org.vertx.java.core.json.JsonObject
 import org.vertx.mods.VertxCommand
 
-@Usage("Interact with vert.x verticles")
+@Usage("interact with vert.x verticles")
 public class verticle extends VertxCommand {
 
   @Command
-  @Usage("Deploy a verticle")
+  @Usage("deploy a verticle")
   public void deploy(
       @Usage("The main to deploy")
       @Argument(name =  "main")

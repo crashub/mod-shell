@@ -13,22 +13,22 @@ import org.vertx.mods.VertxCommand
 
 import java.util.concurrent.atomic.AtomicReference
 
-@Usage("Interact with the vert.x event bus")
+@Usage("interact with the vert.x event bus")
 public class bus extends VertxCommand {
 
-  @Usage("Send a message on the bus")
+  @Usage("send a message on the bus")
   @Command
   public void send(
-      @Usage("The address to send to")
+      @Usage("the address to send to")
       @Argument(name =  "address")
       @Required String address,
-      @Usage("The message format")
+      @Usage("the message format")
       @Option(names = ["f","format"])
       Format format,
-      @Usage("Wait for a reply and publish it on the console")
+      @Usage("wait for a reply and publish it on the console")
       @Option(names= ["r","reply"])
       Boolean reply,
-      @Usage("The message")
+      @Usage("the message")
       @Argument(name =  "message", unquote = false)
       @Required List<String> parts) {
     String value = join(parts);
@@ -62,15 +62,15 @@ public class bus extends VertxCommand {
     }
   }
 
-  @Usage("Publish a JSON object as a message")
+  @Usage("publish a JSON object as a message")
   @Command
   public void publish(
-      @Usage("The address to send to")
+      @Usage("the address to send to")
       @Argument(name =  "address")
       @Required String address,
       @Option(names = ["f","format"])
       Format format,
-      @Usage("The message")
+      @Usage("the message")
       @Argument(name =  "message", unquote = false)
       @Required List<String> parts) {
     String value = join(parts);
@@ -78,10 +78,10 @@ public class bus extends VertxCommand {
     (format?:Format.STRING).publish(bus, address, value);
   }
 
-  @Usage("Read message from the bus")
+  @Usage("read message from the bus")
   @Command
   public void subscribe(
-      @Usage("The address to receive from")
+      @Usage("the address to receive from")
       @Argument(name =  "addresses")
       @Required List<String> addresses) {
 

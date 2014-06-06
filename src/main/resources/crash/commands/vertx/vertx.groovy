@@ -20,11 +20,11 @@ import org.vertx.java.core.net.impl.ServerID
 import org.vertx.java.platform.impl.Deployment
 import org.vertx.mods.VertxCommand
 
-@Usage("Interact with vert.x")
+@Usage("interact with vert.x")
 public class vertx extends VertxCommand {
 
   @Command
-  @Usage("List existing http servers")
+  @Usage("list existing http servers")
   public void http() {
     Map<ServerID, DefaultHttpServer> servers = getVertx().sharedHttpServers();
     servers.each { id, server ->
@@ -47,7 +47,7 @@ public class vertx extends VertxCommand {
   }
 
   @Command
-  @Usage("List existing net servers")
+  @Usage("list existing net servers")
   public void net() {
     Map<ServerID, DefaultNetServer> servers = getVertx().sharedNetServers();
     servers.each { id, server ->
@@ -71,7 +71,7 @@ public class vertx extends VertxCommand {
   }
 
   @Command
-  @Usage("List existing deployments")
+  @Usage("list existing deployments")
   public TreeElement deployments() {
 
     //
@@ -141,7 +141,7 @@ public class vertx extends VertxCommand {
   }
 
   @Command
-  @Usage("Undeploy a deployment")
+  @Usage("undeploy a deployment")
   public void undeploy(
       @Usage("The deployment id")
       @Argument(name =  "id")
@@ -150,7 +150,7 @@ public class vertx extends VertxCommand {
   }
 
   @Command
-  @Usage("Display vert.x config")
+  @Usage("display vert.x config")
   public void config() {
     JsonObject config = container.config();
     if (config != null) {
