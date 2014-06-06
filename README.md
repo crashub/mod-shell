@@ -198,7 +198,7 @@ terminal:
 
     % bus subscribe screen
 
-## Creating custom commands in Groovy
+## Creating custom commands in Groovy or Java
 
 Pretty much like the first example, however we add the current directory under the "cmd" key in the configuration:
 
