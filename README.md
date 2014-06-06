@@ -166,6 +166,37 @@ Use the JDBC module:
 The -r option stands for reply and tell the command to wait and block until a reply is provided after sending the message.
 This is useful with the jdbc module as it sends the result of statement in a response.
 
+## Request executor
+
+CRaSH registers an event handler to the "crash.execute" address which process shell requests. This feature is experimental
+at the moment (feedback welcome).
+
+The format of the event message is Json and contains the mandatory _requests_ String array field.
+
+    % bus publish --format JSON crash.execute {"requests":["help"]}
+
+The optional _reply-to_ field can be used, when specified the handler sends response events to the _replyTo_ address:
+
+    % bus publish --format JSON crash.execute {"requests":["help"],"replyTo":"screen"}
+
+The _vertx execute_ command can be used to make this easier, it will _publish_ the message:
+
+    % vertx execute help
+
+Special care should be ported to the request arguments whitespaces:
+
+    % vertx execute "thread ls"
+
+Several requests can be specified, when a requests ends, the response is sent and the next request is processed. Therefore
+ the execution order is sequential.
+
+    % vertx execute "repl groovy" "1+1"
+
+The _bus subscribe_ command can be used to receive the responses, of course this should be done in another
+terminal:
+
+    % bus subscribe screen
+
 ## Creating custom commands in Groovy
 
 Pretty much like the first example, however we add the current directory under the "cmd" key in the configuration:
@@ -235,13 +266,16 @@ is deployed.
 
     usage: vertx[-h | --help] COMMAND [ARGS]
 
+    usage: vertx [-h | --help] COMMAND [ARGS]
+
     The most commonly used vertx commands are:
-       config           Display vert.x config
-       deployments      List existing deployments
-       deployment       Provide info about an existing deployment
-       undeploy         Undeploy a deployment
-       net              List existing net servers
+       execute          execute a shell request
        http             List existing http servers
+       config           Display vert.x config
+       undeploy         Undeploy a deployment
+       deployments      List existing deployments
+       deployment       Provide more info about an existing deployment
+       net              List existing net servers
 
 ## module command
 

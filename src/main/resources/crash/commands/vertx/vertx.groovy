@@ -2,6 +2,9 @@ package crash.commands.vertx
 
 import org.crsh.cli.Argument
 import org.crsh.cli.Command
+import org.crsh.cli.Man
+import org.crsh.cli.Named
+import org.crsh.cli.Option
 import org.crsh.cli.Required
 import org.crsh.cli.Usage
 import org.crsh.text.ui.BorderStyle
@@ -10,6 +13,7 @@ import org.crsh.text.ui.RowElement
 import org.crsh.text.ui.TableElement
 import org.crsh.text.ui.TreeElement;
 import org.vertx.java.core.http.impl.DefaultHttpServer
+import org.vertx.java.core.json.JsonArray
 import org.vertx.java.core.json.JsonObject
 import org.vertx.java.core.net.impl.DefaultNetServer
 import org.vertx.java.core.net.impl.ServerID
@@ -159,4 +163,38 @@ public class vertx extends VertxCommand {
     }
   }
 
+  @Command
+  @Named("execute")
+  @Usage("execute a shell request")
+  @Man("""\
+Execute requests by publishing events to the "crash.execute" address. CRaSH has an event handler that execute
+requests:
+
+% vertx execute help
+
+Each request should be quoted or at least white spaces should be properly escaped:
+
+% vertx execute thread\\ ls "thread ls"
+
+When several requests are specified, they will execute sequentially:
+
+% vertx execute "repl groovy" "1+1"
+
+The optional reply-to argument can be used to receive the responses:
+
+% vertx execute --reply-to screen "thread ls"
+
+""")
+  public void invoke(
+      @Option(names = ["reply-to"]) @Usage("the optional reply to address for the response events") String replyTo,
+      @Argument @Required @Usage("the requests to execute") List<String> requests) {
+    def bus = getVertx().eventBus()
+    JsonArray requestsArray = new JsonArray();
+    requests.each { String request -> requestsArray.add(request); };
+    def event = new JsonObject().putArray("requests", requestsArray);
+    if (replyTo != null) {
+      event.putString("replyTo", replyTo);
+    }
+    bus.publish("crash.execute", event);
+  }
 }
