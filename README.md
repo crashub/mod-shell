@@ -256,63 +256,57 @@ is deployed.
     Try one of these commands with the -h or --help switch:                                                                                                                                                                
                                                                                                                                                                                                                        
     NAME      DESCRIPTION                                                                                                                                                                                                  
-    bus       Interact with the vert.x event bus                                                                                                                                                                           
-    module    Interact with vert.x modules                                                                                                                                                                                 
-    sharedmap Interact with the vert.x shared map                                                                                                                                                                          
-    verticle  Interact with vert.x verticles                                                                                                                                                                               
-    vertx     Interact with vert.x                                                                                                                                                                                         
+    bus       interact with the vert.x event bus
+    module    interact with vert.x modules
+    sharedmap interact with the vert.x shared map
+    verticle  interact with vert.x verticles
+    vertx     interact with vert.x
 
 ## vertx command
-
-    usage: vertx[-h | --help] COMMAND [ARGS]
 
     usage: vertx [-h | --help] COMMAND [ARGS]
 
     The most commonly used vertx commands are:
        execute          execute a shell request
-       http             List existing http servers
-       config           Display vert.x config
-       undeploy         Undeploy a deployment
-       deployments      List existing deployments
+       net              list existing net servers
+       config           display vert.x config
+       undeploy         undeploy a deployment
+       deployments      list existing deployments
        deployment       Provide more info about an existing deployment
-       net              List existing net servers
+       http             list existing http servers
+
 
 ## module command
 
-    usage: module [-h | --help] deploy [-i | --instances] main ... config
+    usage: module [-h | --help] COMMAND [ARGS]
 
-       [-h | --help]      command usage
-       [-i | --instances] The number of instances
-       main               The main to deploy
-       ... config         The module config
+     The most commonly used module commands are:
+        deploy           deploy a module
 
 ## sharedmap command
 
-    usage: sharedmap[-h | --help] COMMAND [ARGS]
+    usage: sharedmap [-h | --help] COMMAND [ARGS]
 
     The most commonly used sharedmap commands are:
-       get              Get a value
-       put              Put a value
-       clear            Clear a map
-       destroy          Destroy a shared map
-       keys             List content of a map
-       rm               Remove a value
+       get              get a value
+       put              put a value
+       clear            clear a map
+       destroy          destroy a shared map
+       keys             list content of a map
+       rm               remove a value
 
 ## verticle command
 
-    usage: verticle [-h | --help] deploy [-i | --instances] [-w | --worker] main ... config
+    usage: verticle [-h | --help] COMMAND [ARGS]
 
-       [-h | --help]      command usage
-       [-i | --instances] The number of instances
-       [-w | --worker]    Specify the verticle to be a worker
-       main               The main to deploy
-       ... config         The verticle config
+    The most commonly used verticle commands are:
+       deploy           deploy a verticle
 
 ## bus command
 
-    usage: bus[-h | --help] COMMAND [ARGS]
+    usage: bus [-h | --help] COMMAND [ARGS]
 
     The most commonly used bus commands are:
-       publish          Publish a JSON object as a message
-       send             Send a message on the bus
-       subscribe        Read message from the bus
+       publish          publish a JSON object as a message
+       send             send a message on the bus
+       subscribe        read message from the bus
