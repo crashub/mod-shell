@@ -5,6 +5,7 @@ The module mod-shell provides an embedded shell for Vert.x based on [CRaSH shell
 * Extend Vertx with a command line interface
     * Script Vert.x
     * Write your own commands in Groovy or Java (more languages later...)
+    * Execute commands from the event bus
 * Advanced Vert.x management
     * List Vert.x http and net servers
     * List Vert.x deployments
