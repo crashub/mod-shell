@@ -176,7 +176,7 @@ The format of the event message is Json and contains the mandatory _requests_ St
 
     % bus publish --format JSON crash.execute {"requests":["help"]}
 
-The optional _reply-to_ field can be used, when specified the handler sends response events to the _replyTo_ address:
+The optional _replyTo_ field can be used, when specified the handler sends response events to the _replyTo_ address:
 
     % bus publish --format JSON crash.execute {"requests":["help"],"replyTo":"screen"}
 
