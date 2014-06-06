@@ -1,7 +1,7 @@
 package org.vertx.mods;
 
-import org.crsh.command.CRaSHCommand;
 import org.crsh.command.ScriptException;
+import org.crsh.groovy.GroovyCommand;
 import org.vertx.java.core.Vertx;
 import org.vertx.java.core.json.DecodeException;
 import org.vertx.java.core.json.JsonObject;
@@ -13,12 +13,11 @@ import org.vertx.java.platform.impl.PlatformManagerInternal;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /** @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a> */
-public class VertxCommand extends CRaSHCommand {
+public class VertxCommand extends GroovyCommand {
 
   protected final Vertx getVertx() {
     return (Vertx)context.getAttributes().get("vertx");
