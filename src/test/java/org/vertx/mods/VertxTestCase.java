@@ -26,7 +26,6 @@ public class VertxTestCase extends TestVerticle {
             putString("crash.auth.simple.password", "admin"),
         new Handler<AsyncResult<String>>() {
       public void handle(AsyncResult<String> stringAsyncResult) {
-        System.out.println("DEPLOYED " + stringAsyncResult.cause());
         startTests();
       }
     });
