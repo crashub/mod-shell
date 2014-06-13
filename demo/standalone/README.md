@@ -1,6 +1,6 @@
 Run with
 
-    vertx runmod org.crashub~vertx.shell~2.0.6 -conf conf.json
+    vertx runmod org.crashub~vertx.shell~2.0.7 -conf conf.json
 
 Login (pass=admin) with
 
