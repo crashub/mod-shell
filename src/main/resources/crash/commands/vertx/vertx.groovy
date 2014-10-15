@@ -141,12 +141,158 @@ public class vertx extends VertxCommand {
   }
 
   @Command
+  @Usage("stop vertx")
+  public String stop() {
+    System.exit(0)
+  }
+
+  @Command
   @Usage("undeploy a deployment")
   public void undeploy(
       @Usage("The deployment id")
       @Argument(name =  "id")
       @Required String id) {
     manager.undeploy(id, null);
+  }
+
+  @Command
+  @Usage("Undeploy all deployments containing the given module id (owner~name~version)")
+  public TreeElement undeployByModId(
+      @Usage("The module id")
+      @Argument(name =  "id")
+      @Required String id) {
+
+    if(id == "null") return new TreeElement("Cannot undeploy null module id")
+
+    String result = ""
+    for(deployment in deployments)
+    {
+      if(deployment.value.modID.toString().equals(id))
+      {
+        undeploy(deployment.value.name)
+        result += "Undeployed " + deployment.value.name +"\n"
+      }
+    }
+    if(result.equals("")) return new TreeElement("No existing deployments contain " + id)
+    return result;
+  }
+
+  @Command
+  @Usage("Undeploy and uninstall all deployments containing the given module id (owner~name~version)")
+  public TreeElement undeployUninstallByModId(
+     @Usage("The module id")
+      @Argument(name =  "id")
+      @Required String id) {
+
+    if(id == "null") return new TreeElement("Cannot undeploy null module id")
+
+    String result = ""
+    for(deployment in deployments)
+    {
+      if(deployment.value.modID.toString().equals(id))
+      {
+        undeploy(deployment.value.name)
+        result += "Undeployed " + deployment.value.name +"\n"
+        manager.uninstallModule(deployment.value.modID.toString(),null)
+        result += "Uninstalled " + deployment.value.modID.toString() + "\n"
+      }
+    }
+    if(result.equals("")) return new TreeElement("No existing deployments contain " + id)
+    return result;
+  }
+
+  @Command
+  @Usage("Undeploy all deployments containing the given module owner and name")
+  public TreeElement undeployByModName(
+      @Usage("The module Owner~Name, not including version number")
+      @Argument(name =  "ownerName")
+      @Required String ownerName) {
+
+    if(ownerName == "null") return new TreeElement("Cannot undeploy null module id")
+
+    String result = ""
+    for(deployment in deployments)
+    {
+      if(!(deployment.value.modID == null))
+      {
+        def combinedName = deployment.value.modID.owner + "~" + deployment.value.modID.name
+        if(combinedName.equals(ownerName))
+        {
+          undeploy(deployment.value.name) // deployment name (ex: deployment-f4e43882-131d-465a-a12b-051a5f54e851)
+          result += "Undeployed " + deployment.value.name +"\n"
+        }
+      }
+    }
+
+    if(result.equals("")) return new TreeElement("No existing deployments contain " + ownerName)
+    return new TreeElement(result)
+  }
+
+  @Command
+  @Usage("Undeploy and uninstall all deployments containing the given module owner and name")
+  public TreeElement undeployUninstallByModName(
+      @Usage("The module Owner~Name, not including version number")
+      @Argument(name =  "ownerName")
+      @Required String ownerName) {
+
+    if(ownerName == "null") return new TreeElement("Cannot undeploy null module id")
+
+    String result = ""
+    for(deployment in deployments)
+    {
+      if(!(deployment.value.modID == null))
+      {
+        def combinedName = deployment.value.modID.owner + "~" + deployment.value.modID.name
+        if(combinedName.equals(ownerName))
+        {
+          undeploy(deployment.value.name) // deployment name (ex: deployment-f4e43882-131d-465a-a12b-051a5f54e851)
+          result += "Undeployed " + deployment.value.name +"\n"
+          manager.uninstallModule(deployment.value.modID.toString(),null)
+          result += "Uninstalled " + deployment.value.modID.toString() + "\n"
+        }
+      }
+    }
+
+    if(result.equals("")) return new TreeElement("No existing deployments contain " + ownerName)
+    return new TreeElement(result)
+  }
+
+  @Command
+  @Usage("Undeploy all deployments")
+  public TreeElement undeployAll(){
+
+    String result = ""
+    for(deployment in deployments)
+    {
+      if(!(deployment.value.modID == null) && !deployment.value.modID.name.equals("vertx.shell"))
+      {
+        undeploy(deployment.value.name) // deployment name (ex: deployment-f4e43882-131d-465a-a12b-051a5f54e851)
+        result += "Undeployed " + deployment.value.name + "\n"
+      }
+    }
+
+    if(result.equals("")) return new TreeElement("No existing deployments")
+    return new TreeElement(result)
+  }
+
+  @Command
+  @Usage("Undeploy and uninstall all deployments")
+  public TreeElement undeployUninstallAll(){
+
+    String result = ""
+    for(deployment in deployments)
+    {
+      if(!(deployment.value.modID == null) && !deployment.value.modID.name.equals("vertx.shell"))
+      {
+        undeploy(deployment.value.name) // deployment name (ex: deployment-f4e43882-131d-465a-a12b-051a5f54e851)
+        result += "Undeployed " + deployment.value.name + "\n"
+        manager.uninstallModule(deployment.value.modID.toString(),null)
+        result += "Uninstalled " + deployment.value.modID.toString() + "\n"
+      }
+    }
+
+    if(result.equals("")) return new TreeElement("No existing deployments")
+    return new TreeElement(result)
   }
 
   @Command
